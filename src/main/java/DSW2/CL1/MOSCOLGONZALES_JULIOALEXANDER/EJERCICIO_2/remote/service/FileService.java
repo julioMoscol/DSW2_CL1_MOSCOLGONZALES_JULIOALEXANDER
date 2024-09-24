@@ -6,7 +6,9 @@ import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.time.Year;
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -20,11 +22,16 @@ public class FileService {
     @Async
     public CompletableFuture<String> crearArchivo_1() throws IOException{
         try(FileOutputStream fileOutputStream = new FileOutputStream(FILE_PATH1); DataOutputStream dataOutputStream = new DataOutputStream(fileOutputStream)){
-            dataOutputStream.writeInt(2);
-            dataOutputStream.writeDouble(43.2);
-            dataOutputStream.writeUTF("Archivo creado");
+
+            int numeroEntero = ThreadLocalRandom.current().nextInt(1, 100);
+            double numeroDecimal = ThreadLocalRandom.current().nextDouble(1.0, 100.0);
+            String cadenaTexto = "String random: " + UUID.randomUUID();
+
+            dataOutputStream.writeInt(numeroEntero);
+            dataOutputStream.writeDouble(numeroDecimal);
+            dataOutputStream.writeUTF(cadenaTexto);
             log.info("Se esta creando el archivo 1");
-            Thread.sleep(10000);
+            TimeUnit.SECONDS.sleep(10);
         }catch (InterruptedException ex){
             ex.printStackTrace();
         }
@@ -34,9 +41,13 @@ public class FileService {
     @Async
     public CompletableFuture<String> crearArchivo_2() throws IOException{
         try(FileOutputStream fileOutputStream = new FileOutputStream(FILE_PATH2); DataOutputStream dataOutputStream = new DataOutputStream(fileOutputStream)){
-            dataOutputStream.writeInt(2);
-            dataOutputStream.writeDouble(43.2);
-            dataOutputStream.writeUTF("Archivo creado");
+            int numeroEntero = ThreadLocalRandom.current().nextInt(1, 100);
+            double numeroDecimal = ThreadLocalRandom.current().nextDouble(1.0, 100.0);
+            String cadenaTexto = "String random: " + UUID.randomUUID();
+
+            dataOutputStream.writeInt(numeroEntero);
+            dataOutputStream.writeDouble(numeroDecimal);
+            dataOutputStream.writeUTF(cadenaTexto);
             log.info("Se esta creando el archivo 2");
             TimeUnit.SECONDS.sleep(5);
         }catch (InterruptedException ex){
@@ -48,9 +59,13 @@ public class FileService {
     @Async
     public CompletableFuture<String> crearArchivo_3() throws IOException{
         try(FileOutputStream fileOutputStream = new FileOutputStream(FILE_PATH3); DataOutputStream dataOutputStream = new DataOutputStream(fileOutputStream)){
-            dataOutputStream.writeInt(2);
-            dataOutputStream.writeDouble(43.2);
-            dataOutputStream.writeUTF("Archivo creado");
+            int numeroEntero = ThreadLocalRandom.current().nextInt(1, 100);
+            double numeroDecimal = ThreadLocalRandom.current().nextDouble(1.0, 100.0);
+            String cadenaTexto = "String random: " + UUID.randomUUID();
+
+            dataOutputStream.writeInt(numeroEntero);
+            dataOutputStream.writeDouble(numeroDecimal);
+            dataOutputStream.writeUTF(cadenaTexto);
             log.info("Se esta creando el archivo 3");
             TimeUnit.SECONDS.sleep(7);
         }catch (InterruptedException ex){
