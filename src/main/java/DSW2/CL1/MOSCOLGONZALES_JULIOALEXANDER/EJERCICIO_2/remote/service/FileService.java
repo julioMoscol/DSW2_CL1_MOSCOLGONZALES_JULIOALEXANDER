@@ -1,26 +1,30 @@
-package DSW2.CL1.MOSCOLGONZALES_JULIOALEXANDER.EJERCICIO_2.service;
+package DSW2.CL1.MOSCOLGONZALES_JULIOALEXANDER.EJERCICIO_2.remote.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.time.Year;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
+@Service
 @Slf4j
 public class FileService {
 
-    private static final String FILE_PATH = "archivo_ejercicio.txt";
+    private static final String FILE_PATH1 = "archivo_ejercicio_1.txt";
+    private static final String FILE_PATH2 = "archivo_ejercicio_2.txt";
+    private static final String FILE_PATH3 = "archivo_ejercicio_3.txt";
 
     @Async
     public CompletableFuture<String> crearArchivo_1() throws IOException{
-        try(FileOutputStream fileOutputStream = new FileOutputStream(FILE_PATH); DataOutputStream dataOutputStream = new DataOutputStream(fileOutputStream)){
+        try(FileOutputStream fileOutputStream = new FileOutputStream(FILE_PATH1); DataOutputStream dataOutputStream = new DataOutputStream(fileOutputStream)){
             dataOutputStream.writeInt(2);
             dataOutputStream.writeDouble(43.2);
             dataOutputStream.writeUTF("Archivo creado");
             log.info("Se esta creando el archivo 1");
-            TimeUnit.SECONDS.sleep(10);
+            Thread.sleep(10000);
         }catch (InterruptedException ex){
             ex.printStackTrace();
         }
@@ -29,7 +33,7 @@ public class FileService {
 
     @Async
     public CompletableFuture<String> crearArchivo_2() throws IOException{
-        try(FileOutputStream fileOutputStream = new FileOutputStream(FILE_PATH); DataOutputStream dataOutputStream = new DataOutputStream(fileOutputStream)){
+        try(FileOutputStream fileOutputStream = new FileOutputStream(FILE_PATH2); DataOutputStream dataOutputStream = new DataOutputStream(fileOutputStream)){
             dataOutputStream.writeInt(2);
             dataOutputStream.writeDouble(43.2);
             dataOutputStream.writeUTF("Archivo creado");
@@ -43,7 +47,7 @@ public class FileService {
 
     @Async
     public CompletableFuture<String> crearArchivo_3() throws IOException{
-        try(FileOutputStream fileOutputStream = new FileOutputStream(FILE_PATH); DataOutputStream dataOutputStream = new DataOutputStream(fileOutputStream)){
+        try(FileOutputStream fileOutputStream = new FileOutputStream(FILE_PATH3); DataOutputStream dataOutputStream = new DataOutputStream(fileOutputStream)){
             dataOutputStream.writeInt(2);
             dataOutputStream.writeDouble(43.2);
             dataOutputStream.writeUTF("Archivo creado");
@@ -54,15 +58,4 @@ public class FileService {
         }
         return CompletableFuture.completedFuture("Archivo 3 creado, finalizao");
     }
-
-    /*public void abrirLeerArchivos() throws IOException{
-        try(FileInputStream fileInputStream = new FileInputStream(FILE_PATH); DataInputStream dataInputStream = new DataInputStream(fileInputStream)){
-            int n1 = dataInputStream.readInt();
-            double n2 = dataInputStream.readDouble();
-            String nombre_Archivo = dataInputStream.readUTF();
-            log.info("N1: " + n1);
-            log.info("N2: " + n2);
-            log.info("Nombre del Archivo: " + nombre_Archivo);
-        }
-    }*/
 }
